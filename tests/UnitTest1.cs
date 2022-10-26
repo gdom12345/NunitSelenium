@@ -14,6 +14,7 @@ namespace NunitSelenium.tests
             driverSettings = new DriverSettings
             {
                 driverType = DriverType.CHROME,
+                //Definte Uri from environment config, need to find test site
                 siteUri = new Uri("https://www.google.com/"),
                 //Work on a better solution for this
                 pageObjectType = Type.GetType("NunitSelenium.Pages.HomePage")
