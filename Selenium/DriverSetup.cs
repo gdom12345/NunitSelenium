@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NunitSelenium.Pages;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
 namespace NunitSelenium.Selenium
@@ -10,11 +11,11 @@ namespace NunitSelenium.Selenium
             WebDriver driver = null;
             switch (driverSettings.driverType)
             {
-
+                //look into Webdriver Manager for C#
                 case DriverType.CHROME:
                     var chromeOptions = new ChromeOptions();
                     chromeOptions.PageLoadStrategy = PageLoadStrategy.None;
-                    driver = new ChromeDriver(chromeOptions);
+                    driver = new ChromeDriver(Environment.CurrentDirectory, chromeOptions);
                     break;
                 default:
                     throw new Exception("Unrecognized Driver Type of "
@@ -23,7 +24,7 @@ namespace NunitSelenium.Selenium
 
 
             driver.Navigate().GoToUrl(driverSettings.siteUri);
-            driverSettings.classToWaitFor.WaitForPageLoad();
+            BaseClass pageObject = Activator.CreateInstance(driverSettings.pageObjectType, driver) as BaseClass;
 
             return driver;
         }

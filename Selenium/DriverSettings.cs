@@ -1,6 +1,4 @@
-﻿using NunitSelenium.Pages;
-
-namespace NunitSelenium.Selenium
+﻿namespace NunitSelenium.Selenium
 {
     internal class DriverSettings
     {
@@ -8,7 +6,8 @@ namespace NunitSelenium.Selenium
         public Uri siteUri { get; set; }
 
         //Maybe move Uri into BaseClass
-        public BaseClass classToWaitFor { get; set; }
+        //Rethink Type, need to study generics more
+        public Type pageObjectType { get; set; }
     }
 
     public enum DriverType

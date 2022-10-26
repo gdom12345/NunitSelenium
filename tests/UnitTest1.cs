@@ -1,15 +1,27 @@
+using NunitSelenium.Selenium;
+using OpenQA.Selenium;
+
 namespace NunitSelenium.tests
 {
+
     public class Tests
     {
+        private DriverSettings driverSettings;
         [SetUp]
         public void Setup()
         {
+            driverSettings = new DriverSettings
+            {
+                driverType = DriverType.CHROME,
+                siteUri = new Uri("https://www.google.com/"),
+                pageObjectType = Type.GetType("NunitSelenium.Pages.HomePage")
+            };
         }
 
         [Test]
         public void Test1()
         {
+            WebDriver driver = DriverSetup.InitializeWebDriver(driverSettings);
             Assert.Pass();
         }
     }

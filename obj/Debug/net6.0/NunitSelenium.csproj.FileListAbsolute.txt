@@ -7,10 +7,6 @@ C:\Users\gdom\source\repos\NunitSelenium\NunitSelenium\bin\Debug\net6.0\nunit.en
 C:\Users\gdom\source\repos\NunitSelenium\NunitSelenium\bin\Debug\net6.0\nunit.engine.api.dll
 C:\Users\gdom\source\repos\NunitSelenium\NunitSelenium\bin\Debug\net6.0\nunit.engine.core.dll
 C:\Users\gdom\source\repos\NunitSelenium\NunitSelenium\bin\Debug\net6.0\testcentric.engine.metadata.dll
-C:\Users\gdom\source\repos\NunitSelenium\NunitSelenium\bin\Debug\net6.0\NunitSelenium.deps.json
-C:\Users\gdom\source\repos\NunitSelenium\NunitSelenium\bin\Debug\net6.0\NunitSelenium.runtimeconfig.json
-C:\Users\gdom\source\repos\NunitSelenium\NunitSelenium\bin\Debug\net6.0\NunitSelenium.dll
-C:\Users\gdom\source\repos\NunitSelenium\NunitSelenium\bin\Debug\net6.0\NunitSelenium.pdb
 C:\Users\gdom\source\repos\NunitSelenium\NunitSelenium\bin\Debug\net6.0\Microsoft.VisualStudio.CodeCoverage.Shim.dll
 C:\Users\gdom\source\repos\NunitSelenium\NunitSelenium\bin\Debug\net6.0\Microsoft.TestPlatform.CoreUtilities.dll
 C:\Users\gdom\source\repos\NunitSelenium\NunitSelenium\bin\Debug\net6.0\Microsoft.VisualStudio.TestPlatform.ObjectModel.dll
@@ -93,8 +89,12 @@ C:\Users\gdom\source\repos\NunitSelenium\NunitSelenium\obj\Debug\net6.0\NunitSel
 C:\Users\gdom\source\repos\NunitSelenium\NunitSelenium\obj\Debug\net6.0\NunitSelenium.AssemblyInfo.cs
 C:\Users\gdom\source\repos\NunitSelenium\NunitSelenium\obj\Debug\net6.0\NunitSelenium.csproj.CoreCompileInputs.cache
 C:\Users\gdom\source\repos\NunitSelenium\NunitSelenium\obj\Debug\net6.0\NunitSelenium.csproj.CopyComplete
+C:\Users\gdom\source\repos\NunitSelenium\NunitSelenium\obj\Debug\net6.0\NunitSelenium.genruntimeconfig.cache
+C:\Users\gdom\source\repos\NunitSelenium\NunitSelenium\bin\Debug\net6.0\NunitSelenium.deps.json
+C:\Users\gdom\source\repos\NunitSelenium\NunitSelenium\bin\Debug\net6.0\NunitSelenium.runtimeconfig.json
+C:\Users\gdom\source\repos\NunitSelenium\NunitSelenium\bin\Debug\net6.0\NunitSelenium.dll
+C:\Users\gdom\source\repos\NunitSelenium\NunitSelenium\bin\Debug\net6.0\NunitSelenium.pdb
 C:\Users\gdom\source\repos\NunitSelenium\NunitSelenium\obj\Debug\net6.0\NunitSelenium.dll
 C:\Users\gdom\source\repos\NunitSelenium\NunitSelenium\obj\Debug\net6.0\refint\NunitSelenium.dll
 C:\Users\gdom\source\repos\NunitSelenium\NunitSelenium\obj\Debug\net6.0\NunitSelenium.pdb
-C:\Users\gdom\source\repos\NunitSelenium\NunitSelenium\obj\Debug\net6.0\NunitSelenium.genruntimeconfig.cache
 C:\Users\gdom\source\repos\NunitSelenium\NunitSelenium\obj\Debug\net6.0\ref\NunitSelenium.dll
