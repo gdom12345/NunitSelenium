@@ -10,10 +10,12 @@ namespace NunitSelenium.tests
         [SetUp]
         public void Setup()
         {
+            //Move to a Base class, define driverType from configuration
             driverSettings = new DriverSettings
             {
                 driverType = DriverType.CHROME,
                 siteUri = new Uri("https://www.google.com/"),
+                //Work on a better solution for this
                 pageObjectType = Type.GetType("NunitSelenium.Pages.HomePage")
             };
         }
