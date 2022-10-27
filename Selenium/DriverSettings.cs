@@ -1,6 +1,6 @@
 ﻿namespace NunitSelenium.Selenium
 {
-    internal class DriverSettings
+    public class DriverSettings
     {
         public DriverType driverType { get; set; }
         public Uri siteUri { get; set; }

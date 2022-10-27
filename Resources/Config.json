@@ -1,0 +1,15 @@
+﻿{
+  "currentEnvironment": "QA",
+  "browser": "CHROME",
+  "environments": [
+    {
+      "name": "QA",
+      "baseUri": "https://www.saucedemo.com/",
+      "standardLogin": "performance_glitch_user",
+      "standardPassword": "secret_sauce"
+    }
+
+  ]
+
+
+}
