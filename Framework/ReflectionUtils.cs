@@ -1,6 +1,9 @@
-﻿using NunitSelenium.Selenium.PageComponent;
+﻿using CsvHelper;
+using CsvHelper.Configuration;
+using NunitSelenium.Selenium.PageComponent;
 using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
+using System.Globalization;
 using System.Reflection;
 
 namespace NunitSelenium.Framework
@@ -99,6 +102,18 @@ namespace NunitSelenium.Framework
                     return By.XPath(value);
                 default:
                     throw new Exception("Did NOT find By Locator type of " + how);
+            }
+        }
+
+        //Genericize this and ship it to Utility class
+        public static List<T> getListFromCsvFile<T>(string resourceFileName)
+        {
+            var config = new CsvConfiguration(CultureInfo.InvariantCulture);
+            using (var reader = new StreamReader(FileUtils.getResourcesFolder() + "\\" + resourceFileName))
+            using (var csv = new CsvReader(reader, config))
+            {
+                var records = csv.GetRecords<T>();
+                return new List<T>(records);
             }
         }
     }

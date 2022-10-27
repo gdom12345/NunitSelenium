@@ -9,7 +9,7 @@ using System.Globalization;
 namespace NunitSelenium.tests
 {
 
-    public class Tests : BaseTest
+    public class AddToShoppingCartValidations : BaseTest
     {
         private SignOnPage signOnPage;
         private HomePage homePage;
@@ -26,8 +26,7 @@ namespace NunitSelenium.tests
         {
             homePage = signOnPage.signOn();
             List<ShopItem> inventoryItems = homePage.GetInventoryItems().GetShopItems();
-            List<ShopItem> expectedInventoryItems = getExpectedShopItemsFromFile();
-            CollectionAssert.AreEqual(expectedInventoryItems, inventoryItems);
+
 
         }
 
