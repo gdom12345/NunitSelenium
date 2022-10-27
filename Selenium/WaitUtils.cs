@@ -12,11 +12,6 @@ namespace NunitSelenium.Selenium
             defaultWait.IgnoreExceptionTypes(
                 typeof(NoSuchElementException),
                 typeof(StaleElementReferenceException));
-            //WebDriver driver = null;
-            //WebDriverWait wait = new WebDriverWait(driver, timeToWait);
-            //wait.IgnoreExceptionTypes(
-            //    typeof(NoSuchElementException),
-            //    typeof(StaleElementReferenceException));
             defaultWait.Until(driver => condition);
         }
     }
