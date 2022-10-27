@@ -20,11 +20,9 @@ namespace NunitSelenium.Framework
             string configData = FileUtils.getResourceFile("Config.json");
             EnvironmentInfo environmentInfo = JsonConvert.DeserializeObject<EnvironmentInfo>(configData);
             ConfigData.environment = environmentInfo.getEnvironmentData();
-            //Move to a Base class, define driverType from configuration
             driverSettings = new DriverSettings
             {
                 driverType = environmentInfo.driverType,
-                //Definte Uri from environment config, need to find test site
                 siteUri = ConfigData.environment.baseUri,
                 //Work on a better solution for this
                 pageObjectType = Type.GetType("NunitSelenium.Pages.SignOnPage")

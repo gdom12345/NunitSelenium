@@ -1,5 +1,4 @@
-﻿using NunitSelenium.Framework;
-using NunitSelenium.Selenium;
+﻿using NunitSelenium.Selenium;
 using NunitSelenium.Selenium.PageComponent;
 using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
@@ -37,7 +36,7 @@ namespace NunitSelenium.Pages
 
         public SignOnPage(WebDriver driver) : base(driver)
         {
-            ReflectionUtils.InitElements(this, driver);
+
         }
     }
 

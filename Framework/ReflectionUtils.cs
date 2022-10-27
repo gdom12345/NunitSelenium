@@ -20,21 +20,24 @@ namespace NunitSelenium.Framework
                 if (item.FieldType.Name == "SeleniumElement")
                 {
                     SeleniumElement seleniumElement = new SeleniumElement();
-                    //Clean this up. Shouldn't need to get attribute and then later method
-                    CustomAttributeData attribute = new List<CustomAttributeData>
-                         (item.CustomAttributes).Where(member => member.AttributeType.Name
-                         == "FindsByAttribute").First();
+                    var attribute = Attribute.GetCustomAttribute(item, typeof(FindsByAttribute));
 
                     if (attribute == null)
                     {
                         continue;
                     }
-                    FindsByAttribute MyAttribute = (FindsByAttribute)Attribute
-                        .GetCustomAttribute(item, typeof(FindsByAttribute));
+                    FindsByAttribute findsBy = (FindsByAttribute)attribute;
 
-                    By by = (By)Activator.CreateInstance(typeof(By), BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
-                        null, new object[] { MyAttribute.How.ToString(), MyAttribute.Using },
+                    var objInstance = Activator.CreateInstance(typeof(By),
+                        BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
+                        null, new object[] { findsBy.How.ToString() ?? "", findsBy.Using ?? "" },
                         CultureInfo.InvariantCulture);
+                    if (objInstance == null)
+                    {
+                        continue;
+                    }
+                    By by = (By)objInstance;
+
                     seleniumElement.driver = driver;
                     seleniumElement.by = by;
                     item.SetValue(source, seleniumElement);

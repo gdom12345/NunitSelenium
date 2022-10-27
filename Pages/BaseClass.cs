@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NunitSelenium.Framework;
+using OpenQA.Selenium;
 
 namespace NunitSelenium.Pages
 {
@@ -11,6 +12,7 @@ namespace NunitSelenium.Pages
         public BaseClass(WebDriver driver)
         {
             this.driver = driver;
+            ReflectionUtils.InitElements(this, driver);
 
         }
     }
