@@ -23,6 +23,7 @@ namespace NunitSelenium.tests
             homePage = signOnPage.signOn();
         }
 
+        //cleanup arguments, I'll pass them as ShoppingItem
         [Test, TestCaseSource("ShoppingListData")]
         public void ValidateWeCanAddDataDrivenSetToCart(string name, string description, string price)
         {
