@@ -13,9 +13,6 @@ namespace NunitSelenium.Framework
             System.Reflection.FieldInfo[] ps = source.GetType().GetFields();
             foreach (var item in ps)
             {
-                string itemType = item.FieldType.Name;
-                string itemType1 = item.GetType().FullName;
-                Type type = item.GetType();
 
                 if (item.FieldType.Name == "SeleniumElement")
                 {
