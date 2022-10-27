@@ -12,7 +12,6 @@ namespace NunitSelenium.Framework
     {
         protected DriverSettings driverSettings;
         protected WebDriver driver;
-        protected SignOnInfo standardSignOn;
 
         [OneTimeSetUp]
         public void Init()
@@ -28,7 +27,7 @@ namespace NunitSelenium.Framework
                 pageObjectType = Type.GetType("NunitSelenium.Pages.SignOnPage")
             };
 
-            standardSignOn = new SignOnInfo
+            ConfigData.standardSignOnInfo = new SignOnInfo
             {
                 user = ConfigData.environment.standardLogin,
                 password = ConfigData.environment.standardPassword

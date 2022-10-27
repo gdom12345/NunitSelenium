@@ -1,16 +1,51 @@
 ﻿using NunitSelenium.Selenium.PageComponent;
 using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
-using System.Globalization;
 using System.Reflection;
 
 namespace NunitSelenium.Framework
 {
-    public class ReflectionUtils
+    public static class ReflectionUtils
     {
+        public static Object GetObject(this Dictionary<string, object> dict, Type type)
+        {
+            var obj = Activator.CreateInstance(type);
+
+            foreach (var kv in dict)
+            {
+                var prop = type.GetProperty(kv.Key);
+                if (prop == null) continue;
+
+                object value = kv.Value;
+                if (value is Dictionary<string, object>)
+                {
+                    value = GetObject(dict, prop.PropertyType); // <= This line
+                }
+
+                prop.SetValue(obj, value, null);
+            }
+            return obj;
+        }
+
+        public static T GetObject<T>(this Dictionary<string, object> dict)
+        {
+            return (T)GetObject(dict, typeof(T));
+        }
+
+        public static List<T> GetList<T>(this List<Dictionary<string, object>> dictList)
+        {
+            List<T> list = new List<T>();
+            foreach (Dictionary<string, object> dict in dictList)
+            {
+                list.Add(GetObject<T>(dict));
+            }
+
+            return list;
+        }
+
         public static void InitElements(object source, WebDriver driver)
         {
-            System.Reflection.FieldInfo[] ps = source.GetType().GetFields();
+            FieldInfo[] ps = source.GetType().GetFields();
             foreach (var item in ps)
             {
 
@@ -25,10 +60,7 @@ namespace NunitSelenium.Framework
                     }
                     FindsByAttribute findsBy = (FindsByAttribute)attribute;
 
-                    var objInstance = Activator.CreateInstance(typeof(By),
-                        BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
-                        null, new object[] { findsBy.How.ToString() ?? "", findsBy.Using ?? "" },
-                        CultureInfo.InvariantCulture);
+                    var objInstance = GetBy(findsBy.How, findsBy.Using);
                     if (objInstance == null)
                     {
                         continue;
@@ -41,6 +73,32 @@ namespace NunitSelenium.Framework
 
                 }
 
+            }
+        }
+
+        private static By GetBy(How how, string value)
+        {
+            //I should replace this with reflection
+            switch (how)
+            {
+                case How.Id:
+                    return By.Id(value);
+                case How.Name:
+                    return By.Name(value);
+                case How.ClassName:
+                    return By.ClassName(value);
+                case How.TagName:
+                    return By.TagName(value);
+                case How.LinkText:
+                    return By.LinkText(value);
+                case How.PartialLinkText:
+                    return By.PartialLinkText(value);
+                case How.CssSelector:
+                    return By.CssSelector(value);
+                case How.XPath:
+                    return By.XPath(value);
+                default:
+                    throw new Exception("Did NOT find By Locator type of " + how);
             }
         }
     }

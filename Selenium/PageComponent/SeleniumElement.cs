@@ -15,7 +15,16 @@ namespace NunitSelenium.Selenium.PageComponent
 
         public bool Displayed()
         {
-            return findWebElement().Displayed;
+            try
+            {
+                return findWebElement().Displayed;
+            }
+            //Element not being present in domain is functionally equivalent from end-user perspective
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
+
         }
         public void Click()
         {

@@ -25,6 +25,7 @@ namespace NunitSelenium.Selenium
 
             driver.Navigate().GoToUrl(driverSettings.siteUri);
             BaseClass pageObject = Activator.CreateInstance(driverSettings.pageObjectType, driver) as BaseClass;
+            pageObject.WaitForPageLoad();
 
             return driver;
         }

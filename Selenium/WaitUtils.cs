@@ -7,12 +7,17 @@ namespace NunitSelenium.Selenium
     {
         public static void WaitFor(Func<bool> condition, TimeSpan timeToWait)
         {
-            WebDriver driver = null;
-            WebDriverWait wait = new WebDriverWait(driver, timeToWait);
-            wait.IgnoreExceptionTypes(
+            DefaultWait<object> defaultWait = new DefaultWait<object>(new object());
+            defaultWait.Timeout = timeToWait;
+            defaultWait.IgnoreExceptionTypes(
                 typeof(NoSuchElementException),
                 typeof(StaleElementReferenceException));
-            wait.Until(driver => condition);
+            //WebDriver driver = null;
+            //WebDriverWait wait = new WebDriverWait(driver, timeToWait);
+            //wait.IgnoreExceptionTypes(
+            //    typeof(NoSuchElementException),
+            //    typeof(StaleElementReferenceException));
+            defaultWait.Until(driver => condition);
         }
     }
 

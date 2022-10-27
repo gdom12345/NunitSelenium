@@ -1,4 +1,5 @@
-﻿using NunitSelenium.Selenium;
+﻿using NunitSelenium.Config;
+using NunitSelenium.Selenium;
 using NunitSelenium.Selenium.PageComponent;
 using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
@@ -25,6 +26,16 @@ namespace NunitSelenium.Pages
             HomePage homePage = new HomePage(driver);
             homePage.WaitForPageLoad();
             return homePage;
+        }
+
+        //Sign on with default values
+        public HomePage signOn()
+        {
+            return signOn(new SignOnInfo
+            {
+                user = ConfigData.environment.standardLogin,
+                password = ConfigData.environment.standardPassword
+            });
         }
 
         public override void WaitForPageLoad()
