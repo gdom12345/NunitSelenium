@@ -1,10 +1,7 @@
-using CsvHelper;
-using CsvHelper.Configuration;
 using NunitSelenium.Framework;
 using NunitSelenium.Pages;
 using NunitSelenium.Pages.PageComponents;
 using NunitSelenium.Selenium;
-using System.Globalization;
 
 namespace NunitSelenium.tests
 {
@@ -25,15 +22,13 @@ namespace NunitSelenium.tests
 
         //cleanup arguments, I'll pass them as ShoppingItem
         [Test, TestCaseSource("ShoppingListData")]
-        public void ValidateWeCanAddDataDrivenSetToCart(string name, string description, string price)
+        public void ValidateWeCanAddDataDrivenSetToCart(ShopItem item)
         {
-            homePage.AddItemToCart(name);
+            homePage.AddItemToCart(item.Name);
             shoppingCartPage = homePage.NavigateToShoppingCart();
-            ShopItem shopItem = shoppingCartPage.GetInventoryItems().GetShopItem(name);
+            ShopItem shopItem = shoppingCartPage.GetInventoryItems().GetShopItem(item.Name);
             Assert.NotNull(shopItem);
-            Assert.AreEqual(name, shopItem.Name);
-            Assert.AreEqual(description, shopItem.Description);
-            Assert.AreEqual(price, shopItem.Price);
+            Assert.AreEqual(item, shopItem);
         }
 
         private static IEnumerable<TestCaseData> ShoppingListData()
@@ -42,20 +37,7 @@ namespace NunitSelenium.tests
              .getListFromCsvFile<ShopItem>("shopitems.csv");
             foreach (ShopItem item in expectedInventoryItems)
             {
-                yield return new TestCaseData(item.Name, item.Description, item.Price)
-                    .SetName("Check That We can add " + item.Name);
-            }
-        }
-
-        //Genericize this and ship it to Utility class
-        private List<ShopItem> getExpectedShopItemsFromFile()
-        {
-            var config = new CsvConfiguration(CultureInfo.InvariantCulture);
-            using (var reader = new StreamReader(FileUtils.getResourcesFolder() + "\\shopitems.csv"))
-            using (var csv = new CsvReader(reader, config))
-            {
-                var records = csv.GetRecords<ShopItem>();
-                return new List<ShopItem>(records);
+                yield return new TestCaseData(item);
             }
         }
 
