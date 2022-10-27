@@ -38,7 +38,6 @@ namespace NunitSelenium.Pages
         public SignOnPage(WebDriver driver) : base(driver)
         {
             ReflectionUtils.InitElements(this, driver);
-            string something = "";
         }
     }
 

@@ -20,6 +20,7 @@ namespace NunitSelenium.Framework
                 if (item.FieldType.Name == "SeleniumElement")
                 {
                     SeleniumElement seleniumElement = new SeleniumElement();
+                    //Clean this up. Shouldn't need to get attribute and then later method
                     CustomAttributeData attribute = new List<CustomAttributeData>
                          (item.CustomAttributes).Where(member => member.AttributeType.Name
                          == "FindsByAttribute").First();
