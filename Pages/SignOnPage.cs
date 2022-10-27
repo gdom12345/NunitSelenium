@@ -40,9 +40,9 @@ namespace NunitSelenium.Pages
 
         public override void WaitForPageLoad()
         {
-            WaitUtils.WaitFor(() => loginButton.Displayed(),
+            WaitUtils.WaitFor(() => usernameTextbox.Displayed(),
                 TimeSpan.FromSeconds(30));
-            Thread.Sleep(200);
+            Thread.Sleep(500);
         }
 
         public SignOnPage(WebDriver driver) : base(driver)

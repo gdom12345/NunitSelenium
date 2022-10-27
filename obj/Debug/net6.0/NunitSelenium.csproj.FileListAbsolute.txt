@@ -100,3 +100,4 @@ C:\Users\gdom\source\repos\NunitSelenium\NunitSelenium\obj\Debug\net6.0\NunitSel
 C:\Users\gdom\source\repos\NunitSelenium\NunitSelenium\obj\Debug\net6.0\ref\NunitSelenium.dll
 C:\Users\gdom\source\repos\NunitSelenium\NunitSelenium\bin\Debug\net6.0\SeleniumExtras.PageObjects.dll
 C:\Users\gdom\source\repos\NunitSelenium\NunitSelenium\bin\Debug\net6.0\WebDriver.Support.dll
+C:\Users\gdom\source\repos\NunitSelenium\NunitSelenium\bin\Debug\net6.0\CsvHelper.dll

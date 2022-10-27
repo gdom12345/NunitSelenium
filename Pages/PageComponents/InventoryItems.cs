@@ -45,5 +45,19 @@ namespace NunitSelenium.Pages.PageComponents
         public string Description { get; set; }
         public string Price { get; set; }
 
+        public override bool Equals(object? obj)
+        {
+            return obj is ShopItem item &&
+                   Name == item.Name &&
+                   Description == item.Description &&
+                   Price == item.Price;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Name, Description, Price);
+        }
+
+
     }
 }

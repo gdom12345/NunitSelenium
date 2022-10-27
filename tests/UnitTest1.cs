@@ -1,7 +1,10 @@
+using CsvHelper;
+using CsvHelper.Configuration;
 using NunitSelenium.Framework;
 using NunitSelenium.Pages;
 using NunitSelenium.Pages.PageComponents;
 using NunitSelenium.Selenium;
+using System.Globalization;
 
 namespace NunitSelenium.tests
 {
@@ -23,7 +26,30 @@ namespace NunitSelenium.tests
         {
             homePage = signOnPage.signOn();
             List<ShopItem> inventoryItems = homePage.GetInventoryItems().GetShopItems();
-            Assert.Pass();
+            List<ShopItem> expectedInventoryItems = getExpectedShopItemsFromFile();
+            CollectionAssert.AreEqual(expectedInventoryItems, inventoryItems);
+
+        }
+
+        //Genericize this and ship it to Utility class
+        private List<ShopItem> getExpectedShopItemsFromFile()
+        {
+            var config = new CsvConfiguration(CultureInfo.InvariantCulture);
+            using (var reader = new StreamReader(FileUtils.getResourcesFolder() + "\\shopitems.csv"))
+            using (var csv = new CsvReader(reader, config))
+            {
+                var records = csv.GetRecords<ShopItem>();
+                return new List<ShopItem>(records);
+            }
+        }
+
+        [TearDown]
+        public void Teardown()
+        {
+            if (driver != null)
+            {
+                driver.Quit();
+            }
         }
     }
 }
