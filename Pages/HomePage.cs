@@ -16,11 +16,13 @@ namespace NunitSelenium.Pages
             return new InventoryItems(driver);
         }
 
-
+        public void AddItemToCart(string name)
+        {
+            GetInventoryItems().AddItemToCart(name);
+        }
 
         public override void WaitForPageLoad()
         {
-            WebElement webElement;
             WaitUtils.WaitFor(() => firstProductName.Displayed(),
                 TimeSpan.FromSeconds(30));
             Thread.Sleep(300);

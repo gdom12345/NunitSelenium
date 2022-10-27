@@ -13,21 +13,37 @@ namespace NunitSelenium.tests
     {
         private SignOnPage signOnPage;
         private HomePage homePage;
+        private ShoppingCartPage shoppingCartPage;
 
         [SetUp]
         public void Setup()
         {
             driver = DriverSetup.InitializeWebDriver(driverSettings);
             signOnPage = new SignOnPage(driver);
+            homePage = signOnPage.signOn();
         }
 
-        [Test]
-        public void Test1()
+        [Test, TestCaseSource("ShoppingListData")]
+        public void ValidateWeCanAddDataDrivenSetToCart(string name, string description, string price)
         {
-            homePage = signOnPage.signOn();
-            List<ShopItem> inventoryItems = homePage.GetInventoryItems().GetShopItems();
+            homePage.AddItemToCart(name);
+            shoppingCartPage = homePage.NavigateToShoppingCart();
+            ShopItem shopItem = shoppingCartPage.GetInventoryItems().GetShopItem(name);
+            Assert.NotNull(shopItem);
+            Assert.AreEqual(name, shopItem.Name);
+            Assert.AreEqual(description, shopItem.Description);
+            Assert.AreEqual(price, shopItem.Price);
+        }
 
-
+        private static IEnumerable<TestCaseData> ShoppingListData()
+        {
+            List<ShopItem> expectedInventoryItems = ReflectionUtils
+             .getListFromCsvFile<ShopItem>("shopitems.csv");
+            foreach (ShopItem item in expectedInventoryItems)
+            {
+                yield return new TestCaseData(item.Name, item.Description, item.Price)
+                    .SetName("Check That We can add " + item.Name);
+            }
         }
 
         //Genericize this and ship it to Utility class
@@ -45,9 +61,23 @@ namespace NunitSelenium.tests
         [TearDown]
         public void Teardown()
         {
+            try
+            {
+                if (shoppingCartPage != null)
+                {
+                    shoppingCartPage.ClearCart();
+                    shoppingCartPage = null;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
             if (driver != null)
             {
                 driver.Quit();
+                driver = null;
             }
         }
     }

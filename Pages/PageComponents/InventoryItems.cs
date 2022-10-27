@@ -6,7 +6,7 @@ namespace NunitSelenium.Pages.PageComponents
 {
     public class InventoryItems
     {
-        private const string INVENTORY_ITEM_XPATH = "//div[@class='inventory_item']";
+        private const string INVENTORY_ITEM_XPATH = "//div[@class='inventory_item' or @class='cart_item']";
 
         private WebDriver driver;
 
@@ -15,17 +15,30 @@ namespace NunitSelenium.Pages.PageComponents
             this.driver = driver;
         }
 
+        public void AddItemToCart(string itemName)
+        {
+            IWebElement addButton = driver.FindElement(
+                By.XPath(INVENTORY_ITEM_XPATH + "[.//*[@class='inventory_item_name'][text()=\""
+                + itemName + "\"]]//button[text()='Add to cart']"));
+            addButton.Click();
+            WaitUtils.WaitFor(() => addButton.Text.ToLower() != "add to cart", TimeSpan.FromSeconds(2));
+            Thread.Sleep(300);
+        }
+
+
         public List<ShopItem> GetShopItems()
         {
             TableParser tableParser = new TableParser(driver);
             var table = tableParser.ParseTable(
-                INVENTORY_ITEM_XPATH + "//div[@class='inventory_item_label']/a|"
+                INVENTORY_ITEM_XPATH + "//a[./div[@class='inventory_item_name']]|"
                 + INVENTORY_ITEM_XPATH + "//div[@class='inventory_item_desc']|"
                 + INVENTORY_ITEM_XPATH + "//div[@class='inventory_item_price']",
                 new string[] { "Name", "Description", "Price" });
             return ReflectionUtils.GetList<ShopItem>(table);
 
         }
+
+
 
         public ShopItem GetShopItem(string itemName)
         {
