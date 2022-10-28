@@ -21,7 +21,7 @@ namespace NunitSelenium.tests
         [Test]
         public void ValidateShopInventory()
         {
-            homePage = signOnPage.signOn();
+            homePage = signOnPage.signOnWithDefaults;
             List<ShopItem> inventoryItems = homePage.inventoryItems.shopItems;
             List<ShopItem> expectedInventoryItems = ReflectionUtils
                 .getListFromCsvFile<ShopItem>("shopitems.csv");

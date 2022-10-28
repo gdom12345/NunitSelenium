@@ -17,7 +17,7 @@ namespace NunitSelenium.tests
         {
             driver = DriverSetup.InitializeWebDriver(driverSettings);
             signOnPage = new SignOnPage(driver);
-            homePage = signOnPage.signOn();
+            homePage = signOnPage.signOnWithDefaults;
         }
 
         [Test, TestCaseSource("ShoppingListData")]

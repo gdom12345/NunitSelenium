@@ -29,13 +29,16 @@ namespace NunitSelenium.Pages
         }
 
         //Sign on with default values
-        public HomePage signOn()
+        public HomePage signOnWithDefaults
         {
-            return signOn(new SignOnInfo
+            get
             {
-                user = ConfigData.environment.standardLogin,
-                password = ConfigData.environment.standardPassword
-            });
+                return signOn(new SignOnInfo
+                {
+                    user = ConfigData.environment.standardLogin,
+                    password = ConfigData.environment.standardPassword
+                });
+            }
         }
 
         public override void WaitForPageLoad()
