@@ -22,7 +22,7 @@ namespace NunitSelenium.tests
         public void ValidateShopInventory()
         {
             homePage = signOnPage.signOn();
-            List<ShopItem> inventoryItems = homePage.GetInventoryItems().GetShopItems();
+            List<ShopItem> inventoryItems = homePage.inventoryItems.shopItems;
             List<ShopItem> expectedInventoryItems = ReflectionUtils
                 .getListFromCsvFile<ShopItem>("shopitems.csv");
             CollectionAssert.AreEqual(expectedInventoryItems, inventoryItems);

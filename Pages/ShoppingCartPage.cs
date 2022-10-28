@@ -28,14 +28,13 @@ namespace NunitSelenium.Pages
 
         }
 
-
-        public InventoryItems GetInventoryItems()
+        public InventoryItems inventoryItems
         {
-            return new InventoryItems(driver);
+            get
+            {
+                return new InventoryItems(driver);
+            }
         }
-
-
-
 
 
         public override void WaitForPageLoad()

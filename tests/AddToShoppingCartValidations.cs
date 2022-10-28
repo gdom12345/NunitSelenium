@@ -25,7 +25,7 @@ namespace NunitSelenium.tests
         {
             homePage.AddItemToCart(item.Name);
             shoppingCartPage = homePage.NavigateToShoppingCart();
-            ShopItem shopItem = shoppingCartPage.GetInventoryItems().GetShopItem(item.Name);
+            ShopItem shopItem = shoppingCartPage.inventoryItems.GetShopItem(item.Name);
             Assert.NotNull(shopItem);
             Assert.AreEqual(item, shopItem);
         }

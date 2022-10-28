@@ -11,14 +11,17 @@ namespace NunitSelenium.Pages
         [FindsBy(How = How.XPath, Using = "(//*[@id='inventory_container']//*[@class='inventory_item_name'])[1]")]
         public SeleniumElement firstProductName;
 
-        public InventoryItems GetInventoryItems()
+        public InventoryItems inventoryItems
         {
-            return new InventoryItems(driver);
+            get
+            {
+                return new InventoryItems(driver);
+            }
         }
 
         public void AddItemToCart(string name)
         {
-            GetInventoryItems().AddItemToCart(name);
+            inventoryItems.AddItemToCart(name);
         }
 
         public override void WaitForPageLoad()

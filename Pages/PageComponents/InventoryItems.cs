@@ -25,24 +25,26 @@ namespace NunitSelenium.Pages.PageComponents
             Thread.Sleep(300);
         }
 
-
-        public List<ShopItem> GetShopItems()
+        public List<ShopItem> shopItems
         {
-            TableParser tableParser = new TableParser(driver);
-            var table = tableParser.ParseTable(
-                INVENTORY_ITEM_XPATH + "//a[./div[@class='inventory_item_name']]|"
-                + INVENTORY_ITEM_XPATH + "//div[@class='inventory_item_desc']|"
-                + INVENTORY_ITEM_XPATH + "//div[@class='inventory_item_price']",
-                new string[] { "Name", "Description", "Price" });
-            return ReflectionUtils.GetList<ShopItem>(table);
-
+            get
+            {
+                TableParser tableParser = new TableParser(driver);
+                var table = tableParser.ParseTable(
+                    INVENTORY_ITEM_XPATH + "//a[./div[@class='inventory_item_name']]|"
+                    + INVENTORY_ITEM_XPATH + "//div[@class='inventory_item_desc']|"
+                    + INVENTORY_ITEM_XPATH + "//div[@class='inventory_item_price']",
+                    new string[] { "Name", "Description", "Price" });
+                return ReflectionUtils.GetList<ShopItem>(table);
+            }
         }
+
 
 
 
         public ShopItem GetShopItem(string itemName)
         {
-            var shopItem = GetShopItems().Find(item => item.Name == itemName);
+            var shopItem = shopItems.Find(item => item.Name == itemName);
             if (shopItem == null)
             {
                 throw new Exception("Did NOT find Shop Item " + itemName);
