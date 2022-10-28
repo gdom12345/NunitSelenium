@@ -43,7 +43,7 @@ namespace NunitSelenium.Pages
 
         public override void WaitForPageLoad()
         {
-            WaitUtils.WaitFor(() => usernameTextbox.Displayed(),
+            WaitUtils.WaitFor(() => usernameTextbox.Displayed,
                 TimeSpan.FromSeconds(30));
             Thread.Sleep(500);
         }

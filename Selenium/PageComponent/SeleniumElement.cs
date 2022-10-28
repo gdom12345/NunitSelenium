@@ -13,27 +13,30 @@ namespace NunitSelenium.Selenium.PageComponent
             return driver.FindElement(by);
         }
 
-        public bool Displayed()
+        public bool Displayed
         {
-            try
+            get
             {
-                return findWebElement().Displayed;
+                try
+                {
+                    return findWebElement().Displayed;
+                }
+                //Element not being present in domain is functionally equivalent from end-user perspective
+                catch (NoSuchElementException)
+                {
+                    return false;
+                }
             }
-            //Element not being present in domain is functionally equivalent from end-user perspective
-            catch (NoSuchElementException)
-            {
-                return false;
-            }
-
         }
         public void Click()
         {
             findWebElement().Click();
         }
 
-        public string GetText()
+        public string Text
         {
-            return new WebElementUtils(findWebElement()).GetText();
+            get { return new WebElementUtils(findWebElement()).GetText(); }
+
         }
 
         public void SendKeys(string text)

@@ -26,7 +26,7 @@ namespace NunitSelenium.Pages
 
         public override void WaitForPageLoad()
         {
-            WaitUtils.WaitFor(() => firstProductName.Displayed(),
+            WaitUtils.WaitFor(() => firstProductName.Displayed,
                 TimeSpan.FromSeconds(30));
             Thread.Sleep(300);
         }

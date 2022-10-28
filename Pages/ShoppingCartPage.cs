@@ -18,7 +18,7 @@ namespace NunitSelenium.Pages
         public void ClearCart()
         {
             int counter = 0;
-            while (removeButton.Displayed() && counter < 10)
+            while (removeButton.Displayed && counter < 10)
             {
                 removeButton.Click();
                 //Replace this with better solution
@@ -39,7 +39,7 @@ namespace NunitSelenium.Pages
 
         public override void WaitForPageLoad()
         {
-            WaitUtils.WaitFor(() => checkoutButton.Displayed(),
+            WaitUtils.WaitFor(() => checkoutButton.Displayed,
                 TimeSpan.FromSeconds(30));
             Thread.Sleep(500);
         }
