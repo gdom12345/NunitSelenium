@@ -12,7 +12,7 @@ namespace NunitSelenium.Selenium
             defaultWait.IgnoreExceptionTypes(
                 typeof(NoSuchElementException),
                 typeof(StaleElementReferenceException));
-            defaultWait.Until(driver => condition);
+            defaultWait.Until(driver => condition.Invoke());
         }
     }
 
